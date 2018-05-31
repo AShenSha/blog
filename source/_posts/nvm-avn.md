@@ -9,7 +9,7 @@ categories:
 date: 
   - 2018-05-30
 photos: 
-  - "https://github.com/songhanlin/hexo-image/blob/master/nvm-avn/x0.jpg?raw=true"
+  - "https://ws1.sinaimg.cn/large/006tKfTcgy1fruabna913j30xc0b4go2.jpg"
 ---
 
 在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.
@@ -46,7 +46,7 @@ $ source .zshrc
 $ nvm --version
 ```
 
-![](https://github.com/songhanlin/hexo-image/blob/master/nvm-avn/x1.png?raw=true)
+![](https://ws1.sinaimg.cn/large/006tKfTcgy1fruabn4gf0j30da02gt8l.jpg)
 显示出版本号即表示安装成功,下面可以使用 nvm 来下载多版本 node
 
 ##### 下载
@@ -61,7 +61,7 @@ $ nvm install v6.10.3
 $ nvm ls
 ```
 
-![](https://github.com/songhanlin/hexo-image/blob/master/nvm-avn/x2.png?raw=true)
+![](https://ws3.sinaimg.cn/large/006tKfTcgy1fruabmyzgkj30f20amgms.jpg)
 绿色箭头指向当前使用的 node 版本
 
 ##### 切换版本
@@ -70,11 +70,11 @@ $ nvm ls
 $ nvm use v6.10.3
 ```
 
-![](https://github.com/songhanlin/hexo-image/blob/master/nvm-avn/x3.png?raw=true)
+![](https://ws4.sinaimg.cn/large/006tKfTcgy1fruabmuhadj30ga01uaa4.jpg)
 
 ##### 查看版本
 
-![](https://github.com/songhanlin/hexo-image/blob/master/nvm-avn/x4.png?raw=true)
+![](https://ws2.sinaimg.cn/large/006tKfTcgy1fruabmmz0lj30e60am3zp.jpg)
 当前箭头指向 6.10.3,切换成功
 
 启动多个终端可以切换多个版本的 node,意思就是可以同时打开多个版本的 node 项目, 而不用担心 node 版本不统一
@@ -112,12 +112,12 @@ $ source xxxx
 ##### 成功
 
 配置文件同上面,这个时候进入项目
-![](https://github.com/songhanlin/hexo-image/blob/master/nvm-avn/x5.png?raw=true)
+![](https://ws4.sinaimg.cn/large/006tKfTcgy1fruabmc1p4j30iy04k74q.jpg)
 
 ##### 失败
 
 显示该 node 版本激活成功,如果该项目的 node 版本你没有安装过,这个时候进入项目:
-![](https://github.com/songhanlin/hexo-image/blob/master/nvm-avn/x6.png?raw=true)
+![](https://ws3.sinaimg.cn/large/006tKfTcgy1fruabm5tnvj30j604saaf.jpg)
 需要自行使用 nvm 下载该 node 版本
 
 自此,打完收工~~

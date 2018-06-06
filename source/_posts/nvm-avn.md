@@ -94,7 +94,7 @@ so,我们需要一个东西来解放我们的生产力,用来自动切换 node �
 ### 安装
 
 ```bash
-$ npm install -g avn avn-nvm avn-n
+$ npm install -g avn avn-nvm
 ```
 
 ### 配置环境变量

@@ -10,9 +10,8 @@ date:
   - 2018-05-30
 photos: 
   - "https://ws1.sinaimg.cn/large/006tKfTcgy1fruabna913j30xc0b4go2.jpg"
+description: 在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.
 ---
-
-在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.
 
 ## [NVM](https://github.com/creationix/nvm)
 

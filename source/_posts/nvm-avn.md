@@ -103,6 +103,12 @@ $ npm install -g avn avn-nvm
 $ avn setup
 ```
 
+> centos 上亲测无效, 需要手动加入配置
+
+```bash
+ [[ -s "$HOME/.avn/bin/avn.sh" ]] && source "$HOME/.avn/bin/avn.sh"
+```
+
 ### 执行配置文件
 
 ```bash

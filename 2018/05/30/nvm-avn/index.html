@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+  <meta name="google-site-verification" content="1z1ELAF9AeKbdGnVzvwrlqxZDrDWS1dgiqnpESoX1YI" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=6.3.0" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.3.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.3.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.3.0" color="#222">
+
+
+
+
+
+
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.3.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+<script type="text/javascript">
+window.onload = function(e){
+  var urls = "https://picsum.photos/"
+  + window.screen.availWidth +
+  "/" + window.screen.availHeight + "/?random";
+  document.body.style.backgroundImage='url('+urls+')';
+}
+</script>
+
+
+  <meta name="description" content="在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.">
+<meta name="keywords" content="Node,Nvm,Avn">
+<meta property="og:type" content="article">
+<meta property="og:title" content="多项目Node版本控制">
+<meta property="og:url" content="http://blog.julysong.com/2018/05/30/nvm-avn/index.html">
+<meta property="og:site_name" content="骑驴码梦">
+<meta property="og:description" content="在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fruabna913j30xc0b4go2.jpg">
+<meta property="og:updated_time" content="2018-06-29T02:05:10.182Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="多项目Node版本控制">
+<meta name="twitter:description" content="在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.">
+<meta name="twitter:image" content="https://ws1.sinaimg.cn/large/006tKfTcgy1fruabna913j30xc0b4go2.jpg">
+
+
+
+  <link rel="alternate" href="/atom.xml" title="骑驴码梦" type="application/atom+xml" />
+
+
+
+
+  <link rel="canonical" href="http://blog.julysong.com/2018/05/30/nvm-avn/"/>
+
+
+
+<script type="text/javascript" id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>多项目Node版本控制 | 骑驴码梦</title>
+  
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style type="text/css">
+    .use-motion .motion-element,
+    .use-motion .brand,
+    .use-motion .menu-item,
+    .sidebar-inner,
+    .use-motion .post-block,
+    .use-motion .pagination,
+    .use-motion .comments,
+    .use-motion .post-header,
+    .use-motion .post-body,
+    .use-motion .collection-title { opacity: initial; }
+
+    .use-motion .logo,
+    .use-motion .site-title,
+    .use-motion .site-subtitle {
+      opacity: initial;
+      top: initial;
+    }
+
+    .use-motion {
+      .logo-line-before i { left: initial; }
+      .logo-line-after i { right: initial; }
+    }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">骑驴码梦</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">我一进门就看到常威在打来福~</p>
+      
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+    <a href="/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-home"></i> <br />首页</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+    <a href="/tags/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />标签</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+    <a href="/categories/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-th"></i> <br />分类</a>
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+    <a href="/archives/" rel="section">
+      <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />归档</a>
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://blog.julysong.com/2018/05/30/nvm-avn/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="TeenSong">
+      <meta itemprop="description" content="常威, 你还说你不会武功">
+      <meta itemprop="image" content="/images/head.jpeg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="骑驴码梦">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">多项目Node版本控制
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2018-05-30 08:00:00" itemprop="dateCreated datePublished" datetime="2018-05-30T08:00:00+08:00">2018-05-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2018-06-29 10:05:10" itemprop="dateModified" datetime="2018-06-29T10:05:10+08:00">2018-06-29</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JavaScript/" itemprop="url" rel="index"><span itemprop="name">JavaScript</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-comment-o"></i>
+                </span>
+                <a href="/2018/05/30/nvm-avn/#comments" itemprop="discussionUrl">
+                
+                  <span class="post-comments-count disqus-comment-count"
+                        data-disqus-identifier="2018/05/30/nvm-avn/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="post-meta-item-icon"
+            >
+            <i class="fa fa-eye"></i>
+             阅读次数： 
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+
+          
+              <div class="post-description">在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.</div>
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+        <div class="post-gallery" itemscope itemtype="http://schema.org/ImageGallery">
+          
+          
+            <div class="post-gallery-row">
+              <a class="post-gallery-img fancybox"
+                 href="https://ws1.sinaimg.cn/large/006tKfTcgy1fruabna913j30xc0b4go2.jpg" rel="gallery_cjizxxvcs0002lhta9sk772bf"
+                 itemscope itemtype="http://schema.org/ImageObject" itemprop="url">
+                <img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fruabna913j30xc0b4go2.jpg" itemprop="contentUrl"/>
+              </a>
+            
+          
+
+          
+          </div>
+        </div>
+      
+
+      
+        <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width="330" height="86" src="//music.163.com/outchain/player?type=2&id=206730&auto=0&height=66"></iframe>
+
+<h2 id="NVM"><a href="#NVM" class="headerlink" title="NVM"></a><a href="https://github.com/creationix/nvm" target="_blank" rel="noopener">NVM</a></h2><h3 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh | bash</span><br></pre></td></tr></table></figure>
+<p>注意: 可查看官网, 中间版本号会改变</p>
+<h3 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h3><p>加入到配置文件中,可能是(~/.bash_profile, ~/.zshrc, ~/.profile, or ~/.bashrc )<br>我这边使用了 zsh,所以直接加入到~/.zshrc 中即可 配置如下:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">export</span> NVM_DIR=<span class="string">"<span class="variable">$HOME</span>/.nvm"</span></span><br><span class="line">[ -s <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span> ] &amp;&amp; . <span class="string">"<span class="variable">$NVM_DIR</span>/nvm.sh"</span></span><br></pre></td></tr></table></figure>
+<h3 id="执行"><a href="#执行" class="headerlink" title="执行"></a>执行</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> .zshrc</span><br></pre></td></tr></table></figure>
+<p>这个时候就可以退出终端,重新打开终端,验证是否安装成功.再次进入终端 输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm --version</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws1.sinaimg.cn/large/006tKfTcgy1fruabn4gf0j30da02gt8l.jpg" alt=""><br>显示出版本号即表示安装成功,下面可以使用 nvm 来下载多版本 node</p>
+<h5 id="下载-1"><a href="#下载-1" class="headerlink" title="下载"></a>下载</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm install v6.10.3</span><br></pre></td></tr></table></figure>
+<h5 id="查看已安装版本"><a href="#查看已安装版本" class="headerlink" title="查看已安装版本"></a>查看已安装版本</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm ls</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fruabmyzgkj30f20amgms.jpg" alt=""><br>绿色箭头指向当前使用的 node 版本</p>
+<h5 id="切换版本"><a href="#切换版本" class="headerlink" title="切换版本"></a>切换版本</h5><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ nvm use v6.10.3</span><br></pre></td></tr></table></figure>
+<p><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fruabmuhadj30ga01uaa4.jpg" alt=""></p>
+<h5 id="查看版本"><a href="#查看版本" class="headerlink" title="查看版本"></a>查看版本</h5><p><img src="https://ws2.sinaimg.cn/large/006tKfTcgy1fruabmmz0lj30e60am3zp.jpg" alt=""><br>当前箭头指向 6.10.3,切换成功</p>
+<p>启动多个终端可以切换多个版本的 node,意思就是可以同时打开多个版本的 node 项目, 而不用担心 node 版本不统一</p>
+<p>此时,虽然可以自由切换版本,在已安装 node 所有版本的时候,每次切换项目都需要手动来改变 node 版本,<br>更有可能这个时候你不知道该项目使用的 node 是多少,</p>
+<p>所以,我们给项目加上一个 node 版本控制文件,用来记录当前项目使用的 node 版本是多少</p>
+<p>在项目的根目录添加文件.node-version,其中写上 v6.10.3,表示该项目使用的 node 版本是 6.10.3<br>这时候,所有的项目的根目录都有了一个这样的文件,但是这个时候需要每个开发人员打开项目都要去看一下,<br>这个项目使用的是哪个版本的 node,依然没有解放多少生产力<br>so,我们需要一个东西来解放我们的生产力,用来自动切换 node 版本的工具</p>
+<h2 id="AVN"><a href="#AVN" class="headerlink" title="AVN"></a><a href="https://github.com/wbyoung/avn" target="_blank" rel="noopener">AVN</a></h2><h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install -g avn avn-nvm</span><br></pre></td></tr></table></figure>
+<h3 id="配置环境变量"><a href="#配置环境变量" class="headerlink" title="配置环境变量"></a>配置环境变量</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ avn setup</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>centos 上亲测无效, 需要手动加入配置</p>
+</blockquote>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[[ -s <span class="string">"<span class="variable">$HOME</span>/.avn/bin/avn.sh"</span> ]] &amp;&amp; <span class="built_in">source</span> <span class="string">"<span class="variable">$HOME</span>/.avn/bin/avn.sh"</span></span><br></pre></td></tr></table></figure>
+<h3 id="执行配置文件"><a href="#执行配置文件" class="headerlink" title="执行配置文件"></a>执行配置文件</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="built_in">source</span> xxxx</span><br></pre></td></tr></table></figure>
+<h5 id="成功"><a href="#成功" class="headerlink" title="成功"></a>成功</h5><p>配置文件同上面,这个时候进入项目<br><img src="https://ws4.sinaimg.cn/large/006tKfTcgy1fruabmc1p4j30iy04k74q.jpg" alt=""></p>
+<h5 id="失败"><a href="#失败" class="headerlink" title="失败"></a>失败</h5><p>显示该 node 版本激活成功,如果该项目的 node 版本你没有安装过,这个时候进入项目:<br><img src="https://ws3.sinaimg.cn/large/006tKfTcgy1fruabm5tnvj30j604saaf.jpg" alt=""><br>需要自行使用 nvm 下载该 node 版本</p>
+<p>自此,打完收工~~</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>哇塞, 打赏这么多!</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechat.jpeg" alt="TeenSong 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpeg" alt="TeenSong 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Node/" rel="tag"># Node</a>
+          
+            <a href="/tags/Nvm/" rel="tag"># Nvm</a>
+          
+            <a href="/tags/Avn/" rel="tag"># Avn</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/06/28/Teenage-Dream/" rel="prev" title="Teenage Dream2222">
+                Teenage Dream2222 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="comments">
+      <div id="disqus_thread">
+        <noscript>
+          Please enable JavaScript to view the
+          <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+        </noscript>
+      </div>
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+  <aside id="sidebar" class="sidebar">
+  <iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=27560017&auto=0&height=66"></iframe>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/head.jpeg"
+                alt="TeenSong" />
+            
+              <p class="site-author-name" itemprop="name">TeenSong</p>
+              <p class="site-description motion-element" itemprop="description">常威, 你还说你不会武功</p>
+          </div>
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/songhanlin" target="_blank" title="GitHub"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                  
+                </span>
+              
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#NVM"><span class="nav-number">1.</span> <span class="nav-text">NVM</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#下载"><span class="nav-number">1.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境变量"><span class="nav-number">1.2.</span> <span class="nav-text">环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行"><span class="nav-number">1.3.</span> <span class="nav-text">执行</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#下载-1"><span class="nav-number">1.3.0.1.</span> <span class="nav-text">下载</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看已安装版本"><span class="nav-number">1.3.0.2.</span> <span class="nav-text">查看已安装版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#切换版本"><span class="nav-number">1.3.0.3.</span> <span class="nav-text">切换版本</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#查看版本"><span class="nav-number">1.3.0.4.</span> <span class="nav-text">查看版本</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AVN"><span class="nav-number">2.</span> <span class="nav-text">AVN</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装"><span class="nav-number">2.1.</span> <span class="nav-text">安装</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置环境变量"><span class="nav-number">2.2.</span> <span class="nav-text">配置环境变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#执行配置文件"><span class="nav-number">2.3.</span> <span class="nav-text">执行配置文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#成功"><span class="nav-number">2.3.0.1.</span> <span class="nav-text">成功</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#失败"><span class="nav-number">2.3.0.2.</span> <span class="nav-text">失败</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TeenSong</span>
+
+  
+
+  
+</div>
+
+
+
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv" title="总访客量">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+    </span>
+  
+
+  
+    <span class="site-pv" title="总访问量">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=6.3.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=6.3.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=6.3.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.3.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.3.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=6.3.0"></script>
+
+
+
+  
+
+  
+    <script id="dsq-count-scr" src="https://teensong.disqus.com/count.js" async></script>
+  
+
+  
+    <script type="text/javascript">
+      var disqus_config = function () {
+        this.page.url = 'http://blog.julysong.com/2018/05/30/nvm-avn/';
+        this.page.identifier = '2018/05/30/nvm-avn/';
+        this.page.title = '多项目Node版本控制';
+        };
+      function loadComments () {
+        var d = document, s = d.createElement('script');
+        s.src = 'https://teensong.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', '' + +new Date());
+        (d.head || d.body).appendChild(s);
+      }
+      
+        loadComments();
+      
+    </script>
+  
+
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

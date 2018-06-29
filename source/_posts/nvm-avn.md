@@ -13,7 +13,7 @@ photos:
 description: 在前端飞速发展的这个时代, node 的出现也让更多不可能的事情变成可能. 随即出现的一个问题就是不同的项目可能会存在不同 node, 如果更好的管理 node 版本, 解放人的工作量开始成为一个问题. 本文使用 nvm 和 avn 来解决这个问题.
 ---
 
-<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=206730&auto=1&height=66"></iframe>
+<iframe frameborder="no" border="0" marginwidth="0" marginheight="0" width=330 height=86 src="//music.163.com/outchain/player?type=2&id=206730&auto=0&height=66"></iframe>
 
 ## [NVM](https://github.com/creationix/nvm)
 

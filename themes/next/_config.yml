@@ -481,7 +481,7 @@ pangu: false
 
 # Disqus
 disqus:
-  enable: true
+  enable: false
   shortname: teensong
   count: true
   lazyload: false
@@ -491,9 +491,9 @@ disqus:
 
 # changyan
 changyan:
-  enable: false
-  appid:
-  appkey:
+  enable: true
+  appid: cytHsl8KF
+  appkey: prod_9c226ed54149cb033c4b6ec523999ba0
 
 
 # Valine.

@@ -37,8 +37,6 @@
 
 
 {# #238, Disable Baidu tranformation #}
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
 <meta name="referrer" content="no-referrer" />
 
 

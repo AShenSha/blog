@@ -26,7 +26,7 @@ description: 很多程序员的英语水平可能不是很好, 在阅读英文�
 
 ![](https://dn-shimo-image.qbox.me/9kAcRIJ2SmE2bZuK/1.gif!thumbnail)
 
-#### 2.Youdao Translate [点击下载](https://attachments-cdn.shimo.im/FYTmnIoJoEUS74BW/Youdao_Translate.alfredworkflow)
+#### 2.Youdao Translate [点击下载](http://oss.julysong.com/Youdao_Translate.alfredworkflow)
 
 > 相比第一个, 这个 workflow 就比较简单方便, 适用于阅读英文文档时, 对单词的即时翻译. 此处不多做介绍.
 > 命令也简单 "yd"(有道)

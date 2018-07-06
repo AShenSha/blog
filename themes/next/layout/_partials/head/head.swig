@@ -39,6 +39,7 @@
 {# #238, Disable Baidu tranformation #}
 <meta name="referrer" content="no-referrer" />
 
+<meta http-equiv="Cache-Control" content="no-cache">
 
 {% if theme.google_site_verification %}
   <meta name="google-site-verification" content="{{ theme.google_site_verification }}" />

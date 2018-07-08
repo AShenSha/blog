@@ -522,8 +522,8 @@ gitment:
   lazy: true # Comments lazy loading with a button
   cleanly: false # Hide 'Powered by ...' on footer, and more
   language: # Force language, or auto switch by theme
-  github_user: 381300879@qq.com # MUST HAVE, Your Github Username
-  github_repo: https://github.com/songhanlin/blog.git # MUST HAVE, The name of the repo you use to store Gitment comments
+  github_user: songhanlin # MUST HAVE, Your Github Username
+  github_repo: blog # MUST HAVE, The name of the repo you use to store Gitment comments
   client_id: 58797e27de182d42ab95 # MUST HAVE, Github client id for the Gitment
   client_secret: b04eb623dae17584fe8c2246c7af7dc5ea3f1b2b # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect

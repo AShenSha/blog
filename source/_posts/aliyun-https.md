@@ -46,7 +46,7 @@ description: 超文本传输安全协议（英语：Hypertext Transfer Protocol 
 >
 > 3、HTTPS 连接服务器端资源占用高较高多，相同负载下会增加带宽和服务器投入成本。
 
-此处不做多说, 以上主要参考[传送门](http://www.chinaz.com/web/2017/0224/663236.shtml#content-media5), 想了解的可以去参考.
+以上主要参考该文章[(传送门)](http://www.chinaz.com/web/2017/0224/663236.shtml#content-media5), 此处不做多说, 想了解的可以去参考.
 
 ### 3. How?(怎么做?)
 
@@ -140,4 +140,3 @@ http {
 ```
 
 想要了解这两个 if 的含义, 可以另外自行查阅资料.
-本章结束, 如果有不对的地方欢迎指出.

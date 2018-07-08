@@ -485,7 +485,7 @@ disqus:
 
 # changyan
 changyan:
-  enable: true
+  enable: false
   appid: cytHsl8KF
   appkey: 9c21251f647d6510fe08469968fb1298
 
@@ -528,6 +528,15 @@ gitment:
   client_secret: b04eb623dae17584fe8c2246c7af7dc5ea3f1b2b # EITHER this or proxy_gateway, Github access secret token for the Gitment
   proxy_gateway: # Address of api proxy, See: https://github.com/aimingoo/intersect
   redirect_protocol: # Protocol of redirect_uri with force_redirect_protocol when mint enabled
+
+gitalk:
+  enable: true
+  githubID: 381300879@qq.com  # 例：asdfv1929
+  repo: https://github.com/songhanlin/blog.git   # 例：asdfv1929.github.io
+  ClientID: 58797e27de182d42ab95
+  ClientSecret: b04eb623dae17584fe8c2246c7af7dc5ea3f1b2b
+  adminUser: 381300879@qq.com #指定可初始化评论账户
+  distractionFreeMode: true
 
 # Baidu Share
 # Available value:
